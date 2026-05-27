@@ -5,23 +5,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Student List</h1>
-    </header>
 
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Course</th>
-        </tr>
-        <tr>
-            <td>Shakti</td>
-            <td>COPA</td>
-        </tr>
-        <tr>
-            <td>Loza</td>
-            <td>COPA</td>
-        </tr>
-    </table>
+<header>
+    <h1>Student List</h1>
+</header>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+
+    <tr>
+        <td id="studentName"></td>
+        <td id="studentEmail"></td>
+    </tr>
+
+</table>
+
+<script>
+
+document.getElementById("studentName").innerHTML =
+localStorage.getItem("studentName");
+
+document.getElementById("studentEmail").innerHTML =
+localStorage.getItem("studentEmail");
+
+</script>
+
 </body>
 </html>

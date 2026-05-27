@@ -2,15 +2,69 @@ function showMessage() {
     alert("Welcome to Student Management Website!");
 }
 
-function validateForm() {
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
+// Register Students
+const form = document.getElementById("studentForm");
 
-    if(name == "" || email == "") {
-        alert("Please fill all fields");
-        return false;
-    }
+if (form) {
 
-    alert("Registration Successful");
-    return true;
+    form.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+
+        let students = JSON.parse(localStorage.getItem("students")) || [];
+
+        students.push({
+            name: name,
+            email: email
+        });
+
+        localStorage.setItem("students", JSON.stringify(students));
+
+        alert("Student Registered Successfully!");
+
+        document.getElementById("studentForm").reset();
+
+    });
+
+}
+
+// Display Students
+const table = document.getElementById("studentTable");
+
+if (table) {
+
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    students.forEach(function(student, index) {
+
+        table.innerHTML += `
+        <tr>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>
+                <button onclick="deleteStudent(${index})">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        `;
+
+    });
+
+}
+
+// Delete Student
+function deleteStudent(index) {
+
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    students.splice(index, 1);
+
+    localStorage.setItem("students", JSON.stringify(students));
+
+    location.reload();
+
 }
